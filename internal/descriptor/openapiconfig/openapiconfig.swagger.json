@@ -4,6 +4,12 @@
     "title": "internal/descriptor/openapiconfig/openapiconfig.proto",
     "version": "version not set"
   },
+  "schemes": [
+    "HTTP",
+    "HTTPS",
+    "WS",
+    "WSS"
+  ],
   "consumes": [
     "application/json"
   ],

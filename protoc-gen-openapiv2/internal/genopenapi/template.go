@@ -1783,6 +1783,7 @@ func applyTemplate(p param) (*openapiSwaggerObject, error) {
 			Title:   *p.File.Name,
 			Version: "version not set",
 		},
+		Schemes: []string{"HTTP", "HTTPS", "WS", "WSS"},
 	}
 
 	// Loops through all the services and their exposed GET/POST/PUT/DELETE definitions

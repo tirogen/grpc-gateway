@@ -133,6 +133,8 @@ type Registry struct {
 	// RPC methods that have no HttpRule annotation.
 	generateUnboundMethods bool
 
+	generateRPCMethods bool
+
 	// omitPackageDoc, if false, causes a package comment to be included in the generated code.
 	omitPackageDoc bool
 
@@ -201,6 +203,15 @@ func NewRegistry() *Registry {
 
 // Load loads definitions of services, methods, messages, enumerations and fields from "req".
 func (r *Registry) Load(req *pluginpb.CodeGeneratorRequest) error {
+	var profofiles []*descriptorpb.FileDescriptorProto
+	registry := map[string]struct{}{}
+	for _, f := range req.ProtoFile {
+		if _, ok := registry[f.GetName()]; !ok {
+			registry[f.GetName()] = struct{}{}
+			profofiles = append(profofiles, f)
+		}
+	}
+	req.ProtoFile = profofiles
 	gen, err := protogen.Options{}.New(req)
 	if err != nil {
 		return err
@@ -692,6 +703,11 @@ func (r *Registry) SetWarnOnUnboundMethods(warn bool) {
 // SetGenerateUnboundMethods sets generateUnboundMethods
 func (r *Registry) SetGenerateUnboundMethods(generate bool) {
 	r.generateUnboundMethods = generate
+}
+
+// SetGenerateRPCMethods sets generateRPCMethods
+func (r *Registry) SetGenerateRPCMethods(rpc bool) {
+	r.generateRPCMethods = rpc
 }
 
 // SetOmitPackageDoc controls whether the generated code contains a package comment (if set to false, it will contain one)
