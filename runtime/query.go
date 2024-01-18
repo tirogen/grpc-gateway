@@ -9,7 +9,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/grpc-ecosystem/grpc-gateway/v2/utilities"
+	"github.com/tirogen/grpc-gateway/v2/utilities"
 	"google.golang.org/grpc/grpclog"
 	"google.golang.org/protobuf/encoding/protojson"
 	"google.golang.org/protobuf/proto"
@@ -40,7 +40,7 @@ func PopulateQueryParameters(msg proto.Message, values url.Values, filter *utili
 // DefaultQueryParser is a QueryParameterParser which implements the default
 // query parameters parsing behavior.
 //
-// See https://github.com/grpc-ecosystem/grpc-gateway/issues/2632 for more context.
+// See https://github.com/tirogen/grpc-gateway/issues/2632 for more context.
 type DefaultQueryParser struct{}
 
 // Parse populates "values" into "msg".

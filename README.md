@@ -3,11 +3,11 @@
 <p>
 gRPC to JSON proxy generator following the gRPC HTTP spec
 </p>
-<a href="https://github.com/grpc-ecosystem/grpc-gateway/actions/workflows/main.yml"><img src="https://img.shields.io/github/workflow/status/grpc-ecosystem/grpc-gateway/main?color=379c9c&label=build&logo=github&logoColor=ffffff&style=flat-square"/></a>
+<a href="https://github.com/tirogen/grpc-gateway/actions/workflows/main.yml"><img src="https://img.shields.io/github/workflow/status/grpc-ecosystem/grpc-gateway/main?color=379c9c&label=build&logo=github&logoColor=ffffff&style=flat-square"/></a>
 <a href="https://app.slack.com/client/T029RQSE6/CBATURP1D"><img src="https://img.shields.io/badge/slack-grpc--gateway-379c9c?logo=slack&logoColor=ffffff&style=flat-square"/></a>
-<a href="https://github.com/grpc-ecosystem/grpc-gateway/blob/main/LICENSE"><img src="https://img.shields.io/github/license/grpc-ecosystem/grpc-gateway?color=379c9c&style=flat-square"/></a>
-<a href="https://github.com/grpc-ecosystem/grpc-gateway/releases"><img src="https://img.shields.io/github/v/release/grpc-ecosystem/grpc-gateway?color=379c9c&logoColor=ffffff&style=flat-square"/></a>
-<a href="https://github.com/grpc-ecosystem/grpc-gateway/stargazers"><img src="https://img.shields.io/github/stars/grpc-ecosystem/grpc-gateway?color=379c9c&style=flat-square"/></a>
+<a href="https://github.com/tirogen/grpc-gateway/blob/main/LICENSE"><img src="https://img.shields.io/github/license/grpc-ecosystem/grpc-gateway?color=379c9c&style=flat-square"/></a>
+<a href="https://github.com/tirogen/grpc-gateway/releases"><img src="https://img.shields.io/github/v/release/grpc-ecosystem/grpc-gateway?color=379c9c&logoColor=ffffff&style=flat-square"/></a>
+<a href="https://github.com/tirogen/grpc-gateway/stargazers"><img src="https://img.shields.io/github/stars/grpc-ecosystem/grpc-gateway?color=379c9c&style=flat-square"/></a>
 <a href="https://slsa.dev/images/gh-badge-level3.svg"><img src="https://slsa.dev/images/gh-badge-level3.svg"/></a>
 
 </div>
@@ -71,8 +71,8 @@ to track the versions of the following executable packages:
 package tools
 
 import (
-    _ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway"
-    _ "github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2"
+    _ "github.com/tirogen/grpc-gateway/v2/protoc-gen-grpc-gateway"
+    _ "github.com/tirogen/grpc-gateway/v2/protoc-gen-openapiv2"
     _ "google.golang.org/grpc/cmd/protoc-gen-go-grpc"
     _ "google.golang.org/protobuf/cmd/protoc-gen-go"
 )
@@ -82,8 +82,8 @@ Run `go mod tidy` to resolve the versions. Install by running
 
 ```sh
 $ go install \
-    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-grpc-gateway \
-    github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2 \
+    github.com/tirogen/grpc-gateway/v2/protoc-gen-grpc-gateway \
+    github.com/tirogen/grpc-gateway/v2/protoc-gen-openapiv2 \
     google.golang.org/protobuf/cmd/protoc-gen-go \
     google.golang.org/grpc/cmd/protoc-gen-go-grpc
 ```
@@ -99,15 +99,15 @@ Make sure that your `$GOBIN` is in your `$PATH`.
 
 ### Download the binaries
 
-You may alternatively download the binaries from the [GitHub releases page](https://github.com/grpc-ecosystem/grpc-gateway/releases/latest).
+You may alternatively download the binaries from the [GitHub releases page](https://github.com/tirogen/grpc-gateway/releases/latest).
 We generate [SLSA3 signatures](slsa.dev) using the OpenSSF's [slsa-framework/slsa-github-generator](https://github.com/slsa-framework/slsa-github-generator) during the release process. To verify a release binary:
 
 1. Install the verification tool from [slsa-framework/slsa-verifier#installation](https://github.com/slsa-framework/slsa-verifier#installation).
-2. Download the provenance file `attestation.intoto.jsonl` from the [GitHub releases page](https://github.com/grpc-ecosystem/grpc-gateway/releases/latest).
+2. Download the provenance file `attestation.intoto.jsonl` from the [GitHub releases page](https://github.com/tirogen/grpc-gateway/releases/latest).
 3. Run the verifier:
 
 ```shell
-slsa-verifier -artifact-path <the-binary> -provenance attestation.intoto.jsonl -source github.com/grpc-ecosystem/grpc-gateway -tag <the-tag>
+slsa-verifier -artifact-path <the-binary> -provenance attestation.intoto.jsonl -source github.com/tirogen/grpc-gateway -tag <the-tag>
 ```
 
 Alternatively, see the section on remotely managed plugin versions below.
@@ -354,7 +354,7 @@ import (
   "flag"
   "net/http"
 
-  "github.com/grpc-ecosystem/grpc-gateway/v2/runtime"
+  "github.com/tirogen/grpc-gateway/v2/runtime"
   "google.golang.org/grpc"
   "google.golang.org/grpc/credentials/insecure"
   "google.golang.org/grpc/grpclog"
@@ -488,7 +488,7 @@ This requires no local installation of any plugins. Be careful to use the same
 version of the generator as the runtime library, i.e. if using `v2.16.2`, run
 
 ```shell
-$ go get github.com/grpc-ecosystem/grpc-gateway/v2@v2.16.2
+$ go get github.com/tirogen/grpc-gateway/v2@v2.16.2
 ```
 
 To get the same version of the runtime in your `go.mod`.
@@ -588,7 +588,7 @@ But patches are welcome.
 
 ## Mapping gRPC to HTTP
 
-- [How gRPC error codes map to HTTP status codes in the response](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/runtime/errors.go#L15).
+- [How gRPC error codes map to HTTP status codes in the response](https://github.com/tirogen/grpc-gateway/blob/main/runtime/errors.go#L15).
 - HTTP request source IP is added as `X-Forwarded-For` gRPC request header.
 - HTTP request host is added as `X-Forwarded-Host` gRPC request header.
 - HTTP `Authorization` header is added as `authorization` gRPC request header.
@@ -605,9 +605,9 @@ But patches are welcome.
 
 ## Contribution
 
-See [CONTRIBUTING.md](http://github.com/grpc-ecosystem/grpc-gateway/blob/main/CONTRIBUTING.md).
+See [CONTRIBUTING.md](http://github.com/tirogen/grpc-gateway/blob/main/CONTRIBUTING.md).
 
 ## License
 
 gRPC-Gateway is licensed under the BSD 3-Clause License.
-See [LICENSE](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/LICENSE) for more details.
+See [LICENSE](https://github.com/tirogen/grpc-gateway/blob/main/LICENSE) for more details.

@@ -8,8 +8,8 @@ import (
 	"testing"
 
 	"github.com/google/go-cmp/cmp"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/internal/descriptor"
-	"github.com/grpc-ecosystem/grpc-gateway/v2/protoc-gen-openapiv2/internal/genopenapi"
+	"github.com/tirogen/grpc-gateway/v2/internal/descriptor"
+	"github.com/tirogen/grpc-gateway/v2/protoc-gen-openapiv2/internal/genopenapi"
 	"gopkg.in/yaml.v3"
 
 	"google.golang.org/protobuf/encoding/prototext"
@@ -131,7 +131,7 @@ func TestGenerateYAML(t *testing.T) {
 		wantYAML       string
 	}{
 		{
-			// It tests https://github.com/grpc-ecosystem/grpc-gateway/issues/3557.
+			// It tests https://github.com/tirogen/grpc-gateway/issues/3557.
 			name:           "path item object",
 			inputProtoText: "testdata/generator/path_item_object.prototext",
 			wantYAML:       "testdata/generator/path_item_object.swagger.yaml",
@@ -211,7 +211,7 @@ func requireGenerate(
 }
 
 func TestGeneratedYAMLIndent(t *testing.T) {
-	// It tests https://github.com/grpc-ecosystem/grpc-gateway/issues/2745.
+	// It tests https://github.com/tirogen/grpc-gateway/issues/2745.
 	const in = `
 	file_to_generate: "exampleproto/v1/exampleproto.proto"
 	parameter: "output_format=yaml,allow_delete_body=true"

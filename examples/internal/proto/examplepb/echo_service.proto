@@ -10,7 +10,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/field_mask.proto";
 import "google/protobuf/struct.proto";
 
-option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/examples/internal/proto/examplepb";
+option go_package = "github.com/tirogen/grpc-gateway/v2/examples/internal/proto/examplepb";
 
 // Embedded represents a message embedded in SimpleMessage.
 message Embedded {
@@ -56,39 +56,42 @@ service EchoService {
   // returned.
   rpc Echo(SimpleMessage) returns (SimpleMessage) {
     option (google.api.http) = {
-      post: "/v1/example/echo/{id}"
-      additional_bindings {get: "/v1/example/echo/{id}/{num}"}
-      additional_bindings {get: "/v1/example/echo/{id}/{num}/{lang}"}
-      additional_bindings {get: "/v1/example/echo1/{id}/{line_num}/{status.note}"}
-      additional_bindings {get: "/v1/example/echo2/{no.note}"}
+      post : "/v1/example/echo/{id}"
+      additional_bindings {get : "/v1/example/echo/{id}/{num}"}
+      additional_bindings {get : "/v1/example/echo/{id}/{num}/{lang}"}
+      additional_bindings {
+        get : "/v1/example/echo1/{id}/{line_num}/{status.note}"
+      }
+      additional_bindings {get : "/v1/example/echo2/{no.note}"}
     };
   }
   // EchoBody method receives a simple message and returns it.
   rpc EchoBody(SimpleMessage) returns (SimpleMessage) {
     option (google.api.http) = {
-      post: "/v1/example/echo_body"
-      body: "*"
-      additional_bindings {
-        put: "/v1/example/echo_body/{id}"
-        body: "no"
-      }
+      post : "/v1/example/echo_body"
+      body : "*"
+      additional_bindings {put : "/v1/example/echo_body/{id}" body : "no"}
     };
   }
   // EchoDelete method receives a simple message and returns it.
   rpc EchoDelete(SimpleMessage) returns (SimpleMessage) {
-    option (google.api.http) = {delete: "/v1/example/echo_delete"};
+    option (google.api.http) = {
+      delete : "/v1/example/echo_delete"
+    };
   }
   // EchoPatch method receives a NonStandardUpdateRequest and returns it.
   rpc EchoPatch(DynamicMessageUpdate) returns (DynamicMessageUpdate) {
     option (google.api.http) = {
-      patch: "/v1/example/echo_patch"
-      body: "body"
+      patch : "/v1/example/echo_patch"
+      body : "body"
     };
   }
   // EchoUnauthorized method receives a simple message and returns it. It must
   // always return a google.rpc.Code of `UNAUTHENTICATED` and a HTTP Status code
   // of 401.
   rpc EchoUnauthorized(SimpleMessage) returns (SimpleMessage) {
-    option (google.api.http) = {get: "/v1/example/echo_unauthorized"};
+    option (google.api.http) = {
+      get : "/v1/example/echo_unauthorized"
+    };
   }
 }

@@ -1,18 +1,20 @@
 syntax = "proto3";
 
 // Generate Unannotated Methods Echo Service
-// Similar to echo_service.proto but without annotations and without external configuration.
+// Similar to echo_service.proto but without annotations and without external
+// configuration.
 //
-// Generate Unannotated Methods Echo Service API consists of a single service which returns
-// a message.
+// Generate Unannotated Methods Echo Service API consists of a single service
+// which returns a message.
 package grpc.gateway.examples.internal.proto.examplepb;
 
 // Do not need annotations.proto, can still use well known types as usual
 import "google/protobuf/duration.proto";
 
-option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/examples/internal/proto/examplepb";
+option go_package = "github.com/tirogen/grpc-gateway/v2/examples/internal/proto/examplepb";
 
-// GenerateUnboundMethodsSimpleMessage represents a simple message sent to the unannotated GenerateUnboundMethodsEchoService service.
+// GenerateUnboundMethodsSimpleMessage represents a simple message sent to the
+// unannotated GenerateUnboundMethodsEchoService service.
 message GenerateUnboundMethodsSimpleMessage {
   // Id represents the message identifier.
   string id = 1;
@@ -26,11 +28,14 @@ service GenerateUnboundMethodsEchoService {
   //
   // The message posted as the id parameter will also be
   // returned.
-  rpc Echo(GenerateUnboundMethodsSimpleMessage) returns (GenerateUnboundMethodsSimpleMessage);
+  rpc Echo(GenerateUnboundMethodsSimpleMessage)
+      returns (GenerateUnboundMethodsSimpleMessage);
 
   // EchoBody method receives a simple message and returns it.
-  rpc EchoBody(GenerateUnboundMethodsSimpleMessage) returns (GenerateUnboundMethodsSimpleMessage);
+  rpc EchoBody(GenerateUnboundMethodsSimpleMessage)
+      returns (GenerateUnboundMethodsSimpleMessage);
 
   // EchoDelete method receives a simple message and returns it.
-  rpc EchoDelete(GenerateUnboundMethodsSimpleMessage) returns (GenerateUnboundMethodsSimpleMessage);
+  rpc EchoDelete(GenerateUnboundMethodsSimpleMessage)
+      returns (GenerateUnboundMethodsSimpleMessage);
 }

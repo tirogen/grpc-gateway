@@ -6,7 +6,7 @@ import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 import "google/protobuf/wrappers.proto";
 
-option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/examples/internal/proto/examplepb";
+option go_package = "github.com/tirogen/grpc-gateway/v2/examples/internal/proto/examplepb";
 
 message Wrappers {
   google.protobuf.StringValue string_value = 1;
@@ -23,69 +23,78 @@ message Wrappers {
 service WrappersService {
   rpc Create(Wrappers) returns (Wrappers) {
     option (google.api.http) = {
-      post: "/v1/example/wrappers"
-      body: "*"
+      post : "/v1/example/wrappers"
+      body : "*"
     };
   }
 
-  rpc CreateStringValue(google.protobuf.StringValue) returns (google.protobuf.StringValue) {
+  rpc CreateStringValue(google.protobuf.StringValue)
+      returns (google.protobuf.StringValue) {
     option (google.api.http) = {
-      post: "/v1/testString"
-      body: "*"
+      post : "/v1/testString"
+      body : "*"
     };
   }
-  rpc CreateInt32Value(google.protobuf.Int32Value) returns (google.protobuf.Int32Value) {
+  rpc CreateInt32Value(google.protobuf.Int32Value)
+      returns (google.protobuf.Int32Value) {
     option (google.api.http) = {
-      post: "/v1/testInt32"
-      body: "*"
+      post : "/v1/testInt32"
+      body : "*"
     };
   }
-  rpc CreateInt64Value(google.protobuf.Int64Value) returns (google.protobuf.Int64Value) {
+  rpc CreateInt64Value(google.protobuf.Int64Value)
+      returns (google.protobuf.Int64Value) {
     option (google.api.http) = {
-      post: "/v1/testInt64"
-      body: "*"
+      post : "/v1/testInt64"
+      body : "*"
     };
   }
-  rpc CreateFloatValue(google.protobuf.FloatValue) returns (google.protobuf.FloatValue) {
+  rpc CreateFloatValue(google.protobuf.FloatValue)
+      returns (google.protobuf.FloatValue) {
     option (google.api.http) = {
-      post: "/v1/testFloat"
-      body: "*"
+      post : "/v1/testFloat"
+      body : "*"
     };
   }
-  rpc CreateDoubleValue(google.protobuf.DoubleValue) returns (google.protobuf.DoubleValue) {
+  rpc CreateDoubleValue(google.protobuf.DoubleValue)
+      returns (google.protobuf.DoubleValue) {
     option (google.api.http) = {
-      post: "/v1/testDouble"
-      body: "*"
+      post : "/v1/testDouble"
+      body : "*"
     };
   }
-  rpc CreateBoolValue(google.protobuf.BoolValue) returns (google.protobuf.BoolValue) {
+  rpc CreateBoolValue(google.protobuf.BoolValue)
+      returns (google.protobuf.BoolValue) {
     option (google.api.http) = {
-      post: "/v1/testBool"
-      body: "*"
+      post : "/v1/testBool"
+      body : "*"
     };
   }
-  rpc CreateUInt32Value(google.protobuf.UInt32Value) returns (google.protobuf.UInt32Value) {
+  rpc CreateUInt32Value(google.protobuf.UInt32Value)
+      returns (google.protobuf.UInt32Value) {
     option (google.api.http) = {
-      post: "/v1/testUint32"
-      body: "*"
+      post : "/v1/testUint32"
+      body : "*"
     };
   }
-  rpc CreateUInt64Value(google.protobuf.UInt64Value) returns (google.protobuf.UInt64Value) {
+  rpc CreateUInt64Value(google.protobuf.UInt64Value)
+      returns (google.protobuf.UInt64Value) {
     option (google.api.http) = {
-      post: "/v1/testUint64"
-      body: "*"
+      post : "/v1/testUint64"
+      body : "*"
     };
   }
-  rpc CreateBytesValue(google.protobuf.BytesValue) returns (google.protobuf.BytesValue) {
+  rpc CreateBytesValue(google.protobuf.BytesValue)
+      returns (google.protobuf.BytesValue) {
     option (google.api.http) = {
-      post: "/v1/testBytes"
-      body: "*"
+      post : "/v1/testBytes"
+      body : "*"
     };
   }
   rpc CreateEmpty(google.protobuf.Empty) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      post: "/v1/testEmpty"
-      body: "*"
+      post : "/v1/testEmpty"
+      body : "*"
     };
   }
 }

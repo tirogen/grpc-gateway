@@ -6,7 +6,7 @@ import "examples/internal/proto/examplepb/a_bit_of_everything.proto";
 import "google/api/annotations.proto";
 import "google/protobuf/empty.proto";
 
-option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/examples/internal/proto/examplepb";
+option go_package = "github.com/tirogen/grpc-gateway/v2/examples/internal/proto/examplepb";
 
 // This file is run through a genrule.
 
@@ -14,8 +14,8 @@ option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/examples/internal
 service GeneratedService {
   rpc Create(ABitOfEverything) returns (google.protobuf.Empty) {
     option (google.api.http) = {
-      post: "/v1/example/a_bit_of_everything/generated_create"
-      body: "*"
+      post : "/v1/example/a_bit_of_everything/generated_create"
+      body : "*"
     };
   }
 }

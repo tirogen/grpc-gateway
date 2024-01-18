@@ -5,21 +5,21 @@ package grpc.gateway.examples.internal.helloworld;
 import "google/api/annotations.proto";
 import "google/protobuf/wrappers.proto";
 
-option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/examples/internal/helloworld";
+option go_package = "github.com/tirogen/grpc-gateway/v2/examples/internal/helloworld";
 
 service Greeter {
   rpc SayHello(HelloRequest) returns (HelloReply) {
     option (google.api.http) = {
-      get: "/say/{name}"
-      additional_bindings: {get: "/say/strval/{strVal}"}
-      additional_bindings: {get: "/say/floatval/{floatVal}"}
-      additional_bindings: {get: "/say/doubleval/{doubleVal}"}
-      additional_bindings: {get: "/say/boolval/{boolVal}"}
-      additional_bindings: {get: "/say/bytesval/{bytesVal}"}
-      additional_bindings: {get: "/say/int32val/{int32Val}"}
-      additional_bindings: {get: "/say/uint32val/{uint32Val}"}
-      additional_bindings: {get: "/say/int64val/{int64Val}"}
-      additional_bindings: {get: "/say/uint64val/{uint64Val}"}
+      get : "/say/{name}"
+      additional_bindings : {get : "/say/strval/{strVal}"}
+      additional_bindings : {get : "/say/floatval/{floatVal}"}
+      additional_bindings : {get : "/say/doubleval/{doubleVal}"}
+      additional_bindings : {get : "/say/boolval/{boolVal}"}
+      additional_bindings : {get : "/say/bytesval/{bytesVal}"}
+      additional_bindings : {get : "/say/int32val/{int32Val}"}
+      additional_bindings : {get : "/say/uint32val/{uint32Val}"}
+      additional_bindings : {get : "/say/int64val/{int64Val}"}
+      additional_bindings : {get : "/say/uint64val/{uint64Val}"}
     };
   }
 }
@@ -37,6 +37,4 @@ message HelloRequest {
   google.protobuf.UInt64Value uint64Val = 10;
 }
 
-message HelloReply {
-  string message = 1;
-}
+message HelloReply { string message = 1; }

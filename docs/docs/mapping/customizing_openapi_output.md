@@ -37,7 +37,7 @@ message ABitOfEverything {
             required: ["uuid", "int64_value", "double_value"]
         }
         external_docs: {
-            url: "https://github.com/grpc-ecosystem/grpc-gateway";
+            url: "https://github.com/tirogen/grpc-gateway";
             description: "Find out more about ABitOfEverything";
         }
         example: "{\"uuid\": \"0cf361e1-4b44-483d-a159-54dabdf7e814\"}"
@@ -87,6 +87,7 @@ service ABitOfEverythingService {
 ```
 
 [Swagger Extensions](https://swagger.io/docs/specification/2-0/swagger-extensions/) can be added as key-value pairs to the options. Keys must begin with `x-` and values can be of any type listed [here](https://developers.google.com/protocol-buffers/docs/reference/google.protobuf#value). For example:
+
 ```
 extensions: {
   key: "x-amazon-apigateway-authorizer";
@@ -109,7 +110,7 @@ extensions: {
 }
 ```
 
-Please see this [a_bit_of_everything.proto](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/a_bit_of_everything.proto) for examples of the options being used.
+Please see this [a_bit_of_everything.proto](https://github.com/tirogen/grpc-gateway/blob/main/examples/internal/proto/examplepb/a_bit_of_everything.proto) for examples of the options being used.
 
 ## Using google.api.field_behavior
 
@@ -130,9 +131,10 @@ The following options are used in the Open API output:
 
 Google defines a couple of other options - `OPTIONAL`, `IMMUTABLE`, `INPUT_ONLY` -
 that are not currently used. `OPTIONAL` support is currently under discussion
-in [this issue](https://github.com/grpc-ecosystem/grpc-gateway/issues/669).
+in [this issue](https://github.com/tirogen/grpc-gateway/issues/669).
 
 For `IMMUTABLE` and `INPUT_ONLY` fields, there is an [open issue](https://github.com/OAI/OpenAPI-Specification/issues/1497) in the Open API specification for adding functionality for write-once or immutable fields to the spec.
+
 ## Using go templates in proto file comments
 
 Use [Go templates](https://golang.org/pkg/text/template/) in your proto file comments to allow more advanced documentation such as:
@@ -205,12 +207,14 @@ The content of `tables.md`:
 
 ```markdown
 ## {{.RequestType.Name}}
-| Field ID    | Name      | Type                                                       | Description                  |
-| ----------- | --------- | ---------------------------------------------------------  | ---------------------------- | {{range .RequestType.Fields}}
+
+| Field ID | Name | Type | Description |
+| ----------- | --------- | --------------------------------------------------------- | ---------------------------- | {{range .RequestType.Fields}}
 | {{.Number}} | {{.Name}} | {{if eq .Label.String "LABEL_REPEATED"}}[]{{end}}{{.Type}} | {{fieldcomments .Message .}} | {{end}}
 
 ## {{.ResponseType.Name}}
-| Field ID    | Name      | Type                                                       | Description                  |
+
+| Field ID | Name | Type | Description |
 | ----------- | --------- | ---------------------------------------------------------- | ---------------------------- | {{range .ResponseType.Fields}}
 | {{.Number}} | {{.Name}} | {{if eq .Label.String "LABEL_REPEATED"}}[]{{end}}{{.Type}} | {{fieldcomments .Message .}} | {{end}}
 ```
@@ -229,7 +233,7 @@ This is how the OpenAPI file would be rendered in [Postman](https://www.getpostm
 
 ![Screenshot OpenAPI file in Postman](../../assets/images/gotemplates/postman.png)
 
-For a more detailed example of a proto file that has Go, templates enabled, [see the examples](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/use_go_template.proto).
+For a more detailed example of a proto file that has Go, templates enabled, [see the examples](https://github.com/tirogen/grpc-gateway/blob/main/examples/internal/proto/examplepb/use_go_template.proto).
 
 ### Using custom values
 
@@ -288,7 +292,7 @@ service LoginService {
 
 ## Other plugin options
 
-A comprehensive list of OpenAPI plugin options can be found [here](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/protoc-gen-openapiv2/main.go). Options can be passed via `protoc` CLI:
+A comprehensive list of OpenAPI plugin options can be found [here](https://github.com/tirogen/grpc-gateway/blob/main/protoc-gen-openapiv2/main.go). Options can be passed via `protoc` CLI:
 
 ```sh
 --openapiv2_out . --openapiv2_opt bar=baz,color=red
@@ -297,9 +301,9 @@ A comprehensive list of OpenAPI plugin options can be found [here](https://githu
 Or, with `buf` in `buf.gen.yaml`:
 
 ```yaml
-  - name: openapiv2
-    out: foo
-    opt: bar=baz,color=red
+- name: openapiv2
+  out: foo
+  opt: bar=baz,color=red
 ```
 
 ### Merging output
@@ -312,10 +316,10 @@ To merge disparate `.proto` inputs into a single OpenAPI file, use the `allow_me
 the [generation strategy](https://docs.buf.build/configuration/v1/buf-gen-yaml/#strategy) to `all` when merging many files:
 
 ```yaml
-  - name: openapiv2
-    out: foo
-    strategy: all
-    opt: allow_merge=true,merge_file_name=foo
+- name: openapiv2
+  out: foo
+  strategy: all
+  opt: allow_merge=true,merge_file_name=foo
 ```
 
 ### Enums as integers
@@ -323,7 +327,6 @@ the [generation strategy](https://docs.buf.build/configuration/v1/buf-gen-yaml/#
 To generate enums as integers instead of strings, use `enums_as_ints`.
 
 `opt: enums_as_ints=true` will result in:
-
 
 ```json
 {
@@ -348,6 +351,7 @@ This option also applies if enums_as_ints option is enalbled to generate enums a
 `opt: omit_enum_default_value=true` will result in:
 
 Input Example:
+
 ```
 enum enumValue {
     UNKNOWN = 0;
@@ -356,6 +360,7 @@ enum enumValue {
 ```
 
 Output json:
+
 ```json
 {
     "name": "enumValue",
@@ -401,6 +406,7 @@ Note: Annotations are only supported on Services, Methods, Fields and Enum Value
 `opt: visibility_restriction_selectors=PREVIEW` will result in:
 
 Input Example:
+
 ```protobuf
 service Echo {
     rpc EchoInternal(VisibilityRuleSimpleMessage) returns (VisibilityRuleSimpleMessage) {
@@ -432,67 +438,64 @@ message VisibilityRuleSimpleMessage {
 ```
 
 Output json:
+
 ```json
 {
-    "paths": {
-        "/v1/example/echo_internal_and_preview": {
-            "get": {
-                "summary": "EchoInternalAndPreview is a internal and preview API that should be visible in the OpenAPI spec.",
-                "operationId": "VisibilityRuleEchoService_EchoInternalAndPreview",
-                "responses": {
-                    "200": {
-                        "description": "A successful response.",
-                        "schema": {
-                        "$ref": "#/definitions/examplepbVisibilityRuleSimpleMessage"
-                        }
-                    },
-                    "default": {
-                        "description": "An unexpected error response.",
-                        "schema": {
-                            "$ref": "#/definitions/rpcStatus"
-                        }
-                    }
-                },
-                "parameters": [
-                    {
-                        "name": "previewField",
-                        "in": "query",
-                        "required": false,
-                        "type": "string"
-                    },
-                    {
-                        "name": "anEnum",
-                        "in": "query",
-                        "required": false,
-                        "type": "string",
-                        "enum": [
-                            "UNSPECIFIED",
-                            "VISIBLE",
-                            "PREVIEW"
-                        ],
-                        "default": "UNSPECIFIED"
-                    }
-                ],
-                "tags": [
-                    "VisibilityRuleEchoService"
-                ]
+  "paths": {
+    "/v1/example/echo_internal_and_preview": {
+      "get": {
+        "summary": "EchoInternalAndPreview is a internal and preview API that should be visible in the OpenAPI spec.",
+        "operationId": "VisibilityRuleEchoService_EchoInternalAndPreview",
+        "responses": {
+          "200": {
+            "description": "A successful response.",
+            "schema": {
+              "$ref": "#/definitions/examplepbVisibilityRuleSimpleMessage"
             }
-        }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/rpcStatus"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "previewField",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "anEnum",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": ["UNSPECIFIED", "VISIBLE", "PREVIEW"],
+            "default": "UNSPECIFIED"
+          }
+        ],
+        "tags": ["VisibilityRuleEchoService"]
+      }
     }
+  }
 }
 ```
 
-For a more in depth example see [visibility_rule_echo_service.proto](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_echo_service.proto) and the following output files for different values of `visibility_restriction_selectors`:
-- [`visibility_restriction_selectors=PREVIEW`](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_preview_echo_service.swagger.json)
-- [`visibility_restriction_selectors=INTERNAL`](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_internal_echo_service.swagger.json)
-- [`visibility_restriction_selectors=INTERNAL,visibility_restriction_selectors=PREVIEW`](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_preview_and_internal_echo_service.swagger.json)
-- [Not set](https://github.com/grpc-ecosystem/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_none_echo_service.swagger.json)
+For a more in depth example see [visibility_rule_echo_service.proto](https://github.com/tirogen/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_echo_service.proto) and the following output files for different values of `visibility_restriction_selectors`:
+
+- [`visibility_restriction_selectors=PREVIEW`](https://github.com/tirogen/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_preview_echo_service.swagger.json)
+- [`visibility_restriction_selectors=INTERNAL`](https://github.com/tirogen/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_internal_echo_service.swagger.json)
+- [`visibility_restriction_selectors=INTERNAL,visibility_restriction_selectors=PREVIEW`](https://github.com/tirogen/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_preview_and_internal_echo_service.swagger.json)
+- [Not set](https://github.com/tirogen/grpc-gateway/blob/main/examples/internal/proto/examplepb/visibility_rule_none_echo_service.swagger.json)
 
 ### Path parameters
 
 When defining HTTP bindings with path parameters that contain multiple path segments, as suggested by the [Google AIPs](https://google.aip.dev/), the path parameter names are numbered to avoid generating duplicate paths in the OpenAPI file.
 
 For example, consider:
+
 ```protobuf
 service LibraryService {
   rpc GetShelf(GetShelfRequest) returns (Shelf) {
@@ -517,10 +520,12 @@ message GetBookRequest {
 ```
 
 This will generate the following paths:
+
 - `/v1/{name}`
 - `/v1/{name_1}`
 
 To override the path parameter names, annotate the field used as path parameter:
+
 ```protobuf
 message GetShelfRequest {
   string name = 1 [(grpc.gateway.protoc_gen_openapiv2.options.openapiv2_field) = {field_configuration: {path_param_name: "shelfName"}}];
@@ -531,6 +536,7 @@ message GetBookRequest {
 ```
 
 This will instead generate the following paths:
+
 - `/v1/{shelfName}`
 - `/v1/{bookName}`
 
@@ -544,13 +550,15 @@ a custom post processor for your OAS file to replace any path parameter with `/`
 By default the output format is JSON, but it is possible to configure it using the `output_format` option. Allowed values are: `json`, `yaml`. The output format will also change the extension of the output files.
 
 For example, if using `buf`:
+
 ```yaml
-  - name: openapiv2
-    out: pkg
-    opt: output_format=yaml
+- name: openapiv2
+  out: pkg
+  opt: output_format=yaml
 ```
 
 Input example:
+
 ```protobuf
 syntax = "proto3";
 
@@ -577,23 +585,24 @@ message HelloResp {
 ```
 
 Output:
+
 ```yaml
-swagger: "2.0"
+swagger: '2.0'
 info:
   title: helloproto/v1/example.proto
   version: version not set
 tags:
-- name: EchoService
+  - name: EchoService
 consumes:
-- application/json
+  - application/json
 produces:
-- application/json
+  - application/json
 paths:
   /api/hello:
     get:
       operationId: EchoService_Hello
       responses:
-        "200":
+        '200':
           description: A successful response.
           schema:
             $ref: '#/definitions/v1HelloResp'
@@ -602,12 +611,12 @@ paths:
           schema:
             $ref: '#/definitions/rpcStatus'
       parameters:
-      - name: name
-        in: query
-        required: false
-        type: string
+        - name: name
+          in: query
+          required: false
+          type: string
       tags:
-      - EchoService
+        - EchoService
 definitions:
   protobufAny:
     type: object
@@ -639,6 +648,7 @@ definitions:
 By default service tags are generated for backend services, but it is possible to disable it using the `disable_service_tags` option. Allowed values are: `true`, `false`.
 
 For example, if you are using `buf`:
+
 ```yaml
 version: v1
 plugins:
@@ -655,6 +665,7 @@ protoc --openapiv2_out=. --openapiv2_opt=disable_service_tags=true ./path/to/fil
 ```
 
 Input example:
+
 ```protobuf
 syntax = "proto3";
 
@@ -681,8 +692,9 @@ message HelloResp {
 ```
 
 Output (tags object are not generated):
+
 ```yaml
-swagger: "2.0"
+swagger: '2.0'
 info:
   title: helloproto/v1/example.proto
   version: version not set
@@ -760,7 +772,7 @@ message HelloResp {
 Output (default response not generated):
 
 ```yaml
-swagger: "2.0"
+swagger: '2.0'
 info:
   title: helloproto/v1/hello.proto
   version: version not set
@@ -773,10 +785,10 @@ paths:
     get:
       operationId: EchoService_Hello
       responses:
-        "201":
+        '201':
           description: Created
           schema:
-            $ref: "#/definitions/v1HelloResp"
+            $ref: '#/definitions/v1HelloResp'
       parameters:
         - name: name
           in: query
@@ -839,7 +851,7 @@ message HelloResp {
 Output:
 
 ```yaml
-swagger: "2.0"
+swagger: '2.0'
 info:
   title: helloproto/v1/hello.proto
   version: version not set
@@ -852,10 +864,10 @@ paths:
     get:
       operationId: Hello
       responses:
-        "200":
+        '200':
           description: A successful response.
           schema:
-            $ref: "#/definitions/helloproto.v1.HelloResp"
+            $ref: '#/definitions/helloproto.v1.HelloResp'
       parameters:
         - name: name
           in: query
@@ -886,6 +898,7 @@ If you want to exclude all protobuf comments (such as `// buf:lint:ignore`) from
 **Note**: `ignore_comments` and `use_go_templates` are mutually exclusive and cannot be enabled at the same time.
 
 If you are using `buf`:
+
 ```yaml
 version: v1
 plugins:
@@ -908,7 +921,7 @@ If set to `true`, this will remove all comment text located between `(--` and `-
 
 ### Preserve RPC Path Order
 
-By default, generated Swagger files emit paths found in proto files in alphabetical order. If you would like to 
+By default, generated Swagger files emit paths found in proto files in alphabetical order. If you would like to
 preserve the order of emitted paths to mirror the path order found in proto files, you can use the `preserve_rpc_order` option. If set to `true`, this option will ensure path ordering is preserved for Swagger files with both json and yaml formats.
 
 This option will also ensure path ordering is preserved in the following scenarios:

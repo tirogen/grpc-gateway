@@ -7,7 +7,7 @@ package grpc.gateway.examples.internal.examplepb;
 
 import "google/api/annotations.proto";
 
-option go_package = "github.com/grpc-ecosystem/grpc-gateway/v2/examples/internal/proto/examplepb";
+option go_package = "github.com/tirogen/grpc-gateway/v2/examples/internal/proto/examplepb";
 
 // InMessageA represents a message to ServiceA and ServiceC.
 message InMessageA {
@@ -34,8 +34,8 @@ service ServiceA {
   // Here is the detail explanation about ServiceA.MethodOne.
   rpc MethodOne(InMessageA) returns (OutMessageA) {
     option (google.api.http) = {
-      post: "/v1/example/a/1"
-      body: "*"
+      post : "/v1/example/a/1"
+      body : "*"
     };
   }
   // ServiceA.MethodTwo receives OutMessageA and returns InMessageA
@@ -43,8 +43,8 @@ service ServiceA {
   // Here is the detail explanation about ServiceA.MethodTwo.
   rpc MethodTwo(OutMessageA) returns (InMessageA) {
     option (google.api.http) = {
-      post: "/v1/example/a/2"
-      body: "*"
+      post : "/v1/example/a/2"
+      body : "*"
     };
   }
 }
@@ -56,8 +56,8 @@ service ServiceC {
   // Here is the detail explanation about ServiceC.MethodOne.
   rpc MethodOne(InMessageA) returns (OutMessageC) {
     option (google.api.http) = {
-      post: "/v1/example/c/1"
-      body: "*"
+      post : "/v1/example/c/1"
+      body : "*"
     };
   }
   // ServiceC.MethodTwo receives OutMessageA and returns InMessageA
@@ -65,8 +65,8 @@ service ServiceC {
   // Here is the detail explanation about ServiceC.MethodTwo.
   rpc MethodTwo(OutMessageA) returns (InMessageA) {
     option (google.api.http) = {
-      post: "/v1/example/c/2"
-      body: "*"
+      post : "/v1/example/c/2"
+      body : "*"
     };
   }
 }
