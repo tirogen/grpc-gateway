@@ -36,3 +36,9 @@ func DisableDefaultErrors(b bool) Option {
 		gen.reg.SetDisableDefaultErrors(b)
 	}
 }
+
+func UseGoTemplate(b bool) Option {
+	return func(gen *Generator) {
+		gen.reg.SetUseGoTemplate(b)
+	}
+}
